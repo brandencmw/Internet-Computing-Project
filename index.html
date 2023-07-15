@@ -1,2 +1,88 @@
-<h1>This is working!</h1>
-<h3>What an interesting website</h3>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e41394ba;
+            font-family: 'Arial';
+        }
+        
+        h2 {
+            text-align: center;
+            color: #101111;
+            padding: 20px;
+        }
+
+        .login {
+            width: 400px;
+            overflow: hidden;
+            margin: auto;
+            margin: 0 20 0 400px;
+            padding: 80px;
+            background: #101111;
+            border-radius: 40px;
+        }
+
+        label {
+            color: #d8d8d8;
+            font-size: 20px;
+        }
+
+        #username {
+            width: 380px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+        }
+
+        #password {
+            width: 380px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+        }
+
+        #log {
+            width: 390px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            padding-left: 0px;
+            color: #d8d8d8;
+            background-color: #e41394ba; 
+            cursor: pointer; 
+        }
+
+        #log:hover {
+            background-color: #d8d8d8;
+            color: #e41394ba;
+        }
+
+    </style>
+
+    
+</head>
+<body>
+    <h2>Login Page</h2><br>
+    <div class="login">
+        <form id="login" method="post" action="login.php">
+            <label><b>User Name</b></label>
+            <br><br>
+            <input type="text" name="username" id="username" placeholder="Username">
+            <br><br>
+            <label><b>Password</b></label>
+            <br><br>
+            <input type="Password" name="password" id="password" placeholder="Password">
+            <br><br><br>
+            <input type="submit" name="log" id="log" value="Log In Here">
+            <br><br>
+        </form>
+    </div>
+</body>
+</html>
