@@ -1,0 +1,21 @@
+CREATE DATABASE cp476;
+
+USE cp476;
+
+CREATE TABLE products(
+    productID INT,
+    productName VARCHAR(255),
+    productDescription VARCHAR(255),
+    price DECIMAL(10,2),
+    quantity INT,
+    productStatus VARCHAR(5),
+    supplierID INT PRIMARY KEY
+);
+
+CREATE TABLE suppliers(
+    supplierID INT PRIMARY KEY, 
+    supplierName VARCHAR(255),
+    addr VARCHAR(255),
+    phone VARCHAR(50),
+    email VARCHAR(255)
+);
