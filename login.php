@@ -115,6 +115,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dbname = "cp476";
 
     $success = testConnect($servername, $username, $password);
+
     if($success) {
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
@@ -124,8 +125,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             createDb($servername, $_SESSION['username'], $_SESSION['password'], $dbname);
         }
         initDB($servername, $_SESSION['username'], $_SESSION['password'], $dbname);
+        $message = "success";
+    } else {
+        $message = "incorrect info";
     }
-    echo json_encode(array("loggedIn" => $success));
+    echo json_encode(array("loggedIn" => $success, "message" => $message));
 }
 
 
