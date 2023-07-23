@@ -3,90 +3,78 @@
 <html>
 
 <head>
-    <title>Login Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #e41394ba;
-            font-family: 'Arial';
-        }
-        
-        h2 {
-            text-align: center;
-            color: #101111;
-            padding: 20px;
-        }
-
-        .login {
-            width: 400px;
-            overflow: hidden;
-            margin: auto;
-            margin: 0 20 0 400px;
-            padding: 80px;
-            background: #101111;
-            border-radius: 40px;
-        }
-
-        label {
-            color: #d8d8d8;
-            font-size: 20px;
-        }
-
-        #username {
-            width: 380px;
-            height: 30px;
-            border: none;
-            border-radius: 3px;
-            padding-left: 8px;
-        }
-
-        #password {
-            width: 380px;
-            height: 30px;
-            border: none;
-            border-radius: 3px;
-            padding-left: 8px;
-        }
-
-        #log {
-            width: 390px;
-            height: 40px;
-            border: none;
-            border-radius: 10px;
-            padding-left: 0px;
-            color: #d8d8d8;
-            background-color: #e41394ba; 
-            cursor: pointer; 
-        }
-
-        #log:hover {
-            background-color: #d8d8d8;
-            color: #e41394ba;
-        }
-
-    </style>
-
-    <script src="login.js"></script>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h2>Login Page</h2><br>
-    <div class="login">
-        <form id="login" method="post" onsubmit="onSubmit(event)">
-            <label><b>User Name</b></label>
-            <br><br>
-            <input type="text" name="username" id="username" placeholder="Username">
-            <br><br>
-            <label><b>Password</b></label>
-            <br><br>
-            <input type="Password" name="password" id="password" placeholder="Password">
-            <br><br><br>
-            <input type="submit" name="log" id="log" value="Log In Here">
-            <br><br>
-        </form>
-        <div id="error-box"></div>
+
+    <h2 class="title">Jackiedoesntknowwhattocallthispage Page</h2>
+    <!-- Suppliers table -->
+    <div class="home">
+        <h2 class="tabletitle">Suppliers</h2>
+        <table>
+            <tr>
+                <th>Supplier ID</th>
+                <th>Supplier Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+            </tr>
+        </table>
+
+        <div class="spacer"></div>
+
+        <div class="buttons">
+            <button id="search">Search</button>
+            <button id="update">Update</button>
+            <button id="delete">Delete</button>
+        </div>
+
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Products table -->
+    <div class="home">
+        <h2 class="tabletitle">Products</h2>
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Supplier ID</th>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+            </tr>
+        </table>
+
+        <div class="spacer"></div>
+
+        <div class="buttons">
+            <button id="search">Search</button>
+            <button id="update">Update</button>
+            <button id="delete">Delete</button>
+        </div>
+        
     </div>
 </body>
-
 
 </html>
