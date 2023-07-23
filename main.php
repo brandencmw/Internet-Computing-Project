@@ -1,15 +1,7 @@
-<!DOCTYPE html>
+<?php
+?>
 
-<html>
-
-<head>
-    <title>Home Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-
-    <h2 class="title">Jackiedoesntknowwhattocallthispage Page</h2>
+<h2 class="title">Jackiedoesntknowwhattocallthispage Page</h2>
     <!-- Suppliers table -->
     <div class="home">
         <h2 class="tabletitle">Suppliers</h2>
@@ -75,6 +67,3 @@
         </div>
         
     </div>
-</body>
-
-</html>

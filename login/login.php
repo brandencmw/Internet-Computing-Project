@@ -37,6 +37,33 @@ function initDB($servername, $username, $password, $databaseName) {
 
     $conn = new mysqli($servername, $username, $password, $databaseName);
 
+    #check if the suppliers table is already populated
+    $sql = "SELECT COUNT(*) FROM suppliers";
+    $result = $conn->query($sql);
+    $count = $result->fetch_array()[0];
+    if($count > 0) {
+        $populated= true;
+    } else {
+        $populated = false;
+    }
+
+    if ($populated !== true && ($handle = fopen($supplierFile, "r")) !== false) {
+        while(($result = fgetcsv($handle, 500, ',')) !== false){ #loop through csv file lines
+            $supplierID = $result[0];
+            $supplierName = $result[1];
+            $addr = $result[2];
+            $phone = $result[3];
+            $email = $result[4];
+
+            #insert values into table with prepared statement
+            $sql = "INSERT INTO suppliers (supplierID, supplierName, addr, phone, email) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("issss", $supplierID, $supplierName, $addr, $phone, $email);
+            $stmt->execute();
+            
+        }
+    }
+
     #check if the product table is already populated
     $sql = "SELECT COUNT(*) FROM products";
     $result = $conn->query($sql);
@@ -64,33 +91,6 @@ function initDB($servername, $username, $password, $databaseName) {
             $stmt->bind_param("issdisi", $productID, $productName, $productDescription, $price, $quantity, $productStatus, $supplierID);
             $stmt->execute();
 
-        }
-    }
-
-    #check if the suppliers table is already populated
-    $sql = "SELECT COUNT(*) FROM suppliers";
-    $result = $conn->query($sql);
-    $count = $result->fetch_array()[0];
-    if($count > 0) {
-        $populated= true;
-    } else {
-        $populated = false;
-    }
-
-    if ($populated !== true && ($handle = fopen($supplierFile, "r")) !== false) {
-        while(($result = fgetcsv($handle, 500, ',')) !== false){ #loop through csv file lines
-            $supplierID = $result[0];
-            $supplierName = $result[1];
-            $addr = $result[2];
-            $phone = $result[3];
-            $email = $result[4];
-
-            #insert values into table with prepared statement
-            $sql = "INSERT INTO suppliers (supplierID, supplierName, addr, phone, email) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("issss", $supplierID, $supplierName, $addr, $phone, $email);
-            $stmt->execute();
-            
         }
     }
 }
@@ -127,6 +127,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     echo json_encode(array("loggedIn" => $success));
 }
-
-
 ?>

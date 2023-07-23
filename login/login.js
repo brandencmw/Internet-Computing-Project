@@ -6,15 +6,17 @@ function onSubmit(event) {
     const password = form.elements["password"].value;
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "login.php");
+    xhr.open("POST", "/Internet-Computing-Project/login/login.php");
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     alert("Working");
+    console.log("WORKING");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
+                console.log(xhr.responseText);
                 const response = JSON.parse(xhr.responseText);
                 if (response.loggedIn) {
-                    location.href = "http://localhost/Internet-Computing-Project/loggedin.html"
+                    location.href = "http://localhost/Internet-Computing-Project/"
                 } else {
                     alert('Login failed: ' + response.message);
                     const errorBox = document.getElementById("error-box");
@@ -25,6 +27,12 @@ function onSubmit(event) {
             }
         }
     };
+
     const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     xhr.send(data);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("login");
+    form.addEventListener("submit", (event) => onSubmit(event));
+});
