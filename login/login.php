@@ -20,10 +20,8 @@ function createDB($servername, $username, $password) : bool{
     $conn = new mysqli($servername, $username, $password);
     $sql = file_get_contents('database.sql');
     if($conn->multi_query($sql) === true) {
-        echo "Database creation success.";
         return true;
     } else {
-        echo "Database creation fail." . $conn->error;
         return false;
     }
 }
@@ -80,7 +78,8 @@ function initDB($servername, $username, $password, $databaseName) {
             $productID = $result[0];    
             $productName = $result[1];
             $productDescription = $result[2];
-            $price = $result[3];
+            $price = str_replace('$', '', $result[3]);
+            $price = (float)$price;
             $quantity = $result[4];
             $productStatus = $result[5];
             $supplierID = $result[6];
@@ -89,6 +88,41 @@ function initDB($servername, $username, $password, $databaseName) {
             $sql = "INSERT INTO products (productID, productName, productDescription, price, quantity, productStatus, supplierID) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("issdisi", $productID, $productName, $productDescription, $price, $quantity, $productStatus, $supplierID);
+            $stmt->execute();
+
+        }
+    }
+
+    #check if the inventory table is already populated
+    $sql = "SELECT COUNT(*) FROM inventory";
+    $result = $conn->query($sql);
+    $count = $result->fetch_array()[0];
+    if($count > 0) {
+        $populated= true;
+    } else {
+        $populated = false;
+    }
+
+    if (!$populated){
+        $sql = "SELECT * FROM products";
+        $result = $conn->query($sql);
+
+        while ($item = $result->fetch_assoc()) {
+            $productID = $item['productID'];
+            $productName = $item['productName'];
+            $quantity = $item['quantity'];
+            $price = $item['price'];
+            $status = $item['productStatus'];
+
+            $sql = "SELECT * FROM suppliers WHERE supplierID = " . $item['supplierID'];
+            $supplier = $conn->query($sql);
+            $row = $supplier->fetch_assoc();
+
+            $supplierName = $row['supplierName'];
+
+            $sql = "INSERT INTO inventory (productID, productName, quantity, price, productStatus, supplierName) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("isidss", $productID, $productName, $quantity, $price, $status, $supplierName);
             $stmt->execute();
 
         }

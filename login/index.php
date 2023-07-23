@@ -32,10 +32,6 @@
         </form>
         <div id="error-box"></div>
     </div>
-    <?php
-        echo $_SESSION['username'];
-        echo $_SESSION['password'];
-    ?>
 </body>
 
 
