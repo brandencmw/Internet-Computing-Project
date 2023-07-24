@@ -4,6 +4,12 @@
         header("Location: http://localhost/Internet-Computing-Project/login", TRUE, 301);
         exit();
     }
+
+    function getInventory($conn) {
+        $sql = "SELECT * FROM inventory";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +22,8 @@
 
 <body>
     <h2 class="title">Main Page</h2>
+    <button id="log-out">Log Out</button>
+    <div class="spacer"></div>
     <!-- Suppliers table -->
     <div class="home">
         <h2 class="tabletitle">Suppliers</h2>
@@ -45,25 +53,49 @@
     <!-- Inventory table -->
     <div class="home">
         <h2 class="tabletitle">Inventory</h2>
-        <button>View Current Inventory</button>
         <div class="spacer"></div>
         <table>
             <tr>
                 <th>Product ID</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Product Status</th>
                 <th>Supplier Name</th>
             </tr>
+            <?php foreach($result as $row) { ?>
             <tr>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
+                <td><?php echo $row["productID"] ?></td>
+                <td><?php echo $row["productName"] ?></td>
+                <td><?php echo $row["quantity"] ?></td>
+                <td><?php echo $row["price"] ?></td>
+                <td><?php echo $row["productStatus"] ?></td>
+                <td><?php echo $row["supplierName"] ?></td>
             </tr>
+            <?php } ?>
         </table>
     </div>  
 </body>
 
 </html>
+
+<?php
+    }
+
+    function establishConnection() {
+        $username = $_SESSION["username"];
+        $password = $_SESSION["password"];
+        $servername = "localhost";
+        $dbname = "cp476";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if($conn->connect_errno) {
+            die("Failed to connect " . $conn->connect_errno);
+        }
+
+        return $conn;
+    }
+
+    $conn = establishConnection();
+    getInventory($conn);
+    $conn->close();
+?>

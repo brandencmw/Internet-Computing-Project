@@ -4,11 +4,11 @@
         $productName = $_GET['name'];
 
         if($productName === "") {
-            $sql = "SELECT productID, productName, productDescription, price, quantity, productStatus, supplierID FROM products";
+            $sql = "SELECT * FROM products";
             $stmt = $conn->prepare($sql);
         } else {
             $searchTerm = "%" . $productName . "%";
-            $sql = "SELECT productID, productName, productDescription, price, quantity, productStatus, supplierID FROM products WHERE productName LIKE ?";
+            $sql = "SELECT * FROM products WHERE productName LIKE ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $searchTerm);
         }
@@ -28,6 +28,9 @@
 
 <body>
     <div class="content">
+    <h2>Product Information</h2>
+    <button id="back-button">Back to Main</button>
+    <div class="spacer"></div>
         <table>
             <tr>
                 <th>Product ID</th>

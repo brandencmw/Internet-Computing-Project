@@ -48,8 +48,13 @@ function purchaseProduct(event) {
     xhr.send(data);
 }
 
+function backToMain() {
+    location.href = "http://localhost/Internet-Computing-Project/"
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("BACK");
     const deleteButtons = Array.from(document.getElementsByClassName("delete"));
     deleteButtons.forEach(button => {
         button.addEventListener("click", (event) => deleteProduct(event));
@@ -59,4 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     purchaseButtons.forEach(button => {
         button.addEventListener("click", (event) => purchaseProduct(event));
     });
+
+    const backButton = document.getElementById("back-button");
+    backButton.addEventListener("click", () => backToMain());
 })

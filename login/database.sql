@@ -18,8 +18,8 @@ CREATE TABLE products(
     quantity INT,
     productStatus VARCHAR(5),
     supplierID INT,
-    FOREIGN KEY (supplierID) REFERENCES suppliers(supplierID),
-    PRIMARY KEY (productID, SupplierID)
+    PRIMARY KEY (productID,supplierID),
+    FOREIGN KEY (supplierID) REFERENCES suppliers(supplierID) ON DELETE CASCADE
 );
 
 CREATE TABLE inventory(

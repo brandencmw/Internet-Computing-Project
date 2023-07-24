@@ -8,8 +8,7 @@ function onSubmit(event) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/Internet-Computing-Project/login/login.php");
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    alert("Working");
-    console.log("WORKING");
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
