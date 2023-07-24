@@ -39,6 +39,31 @@
             <input type="submit">
         </form>
     </div>
+
+    <div class="spacer"></div>
+
+    <!-- Inventory table -->
+    <div class="home">
+        <h2 class="tabletitle">Inventory</h2>
+        <button>View Current Inventory</button>
+        <div class="spacer"></div>
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Product Status</th>
+                <th>Supplier Name</th>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+            </tr>
+        </table>
+    </div>  
 </body>
 
 </html>
